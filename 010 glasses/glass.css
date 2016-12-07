@@ -1,0 +1,368 @@
+body, div, ul, li, h5, p {
+    margin: 0;
+    padding: 0;
+}
+a:link, a:visited, a:active {
+    color: #666;
+    outline: none;
+    text-decoration: none;
+}
+li {
+    list-style: none;
+}
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 920px;
+    height: 546px;
+    background: #B7B7B7;
+    opacity: 1;
+    z-index: 15;
+}
+#load{
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    color: #fff;
+    width: 320px;
+    height: 40px;
+    padding: 0 2px;
+    text-align: center;
+    margin-left: -162px;
+    background: url(bar.png) 0 bottom no-repeat;
+}
+#load p{
+    position: absolute;
+    left: 2px;
+    bottom: 2px;
+    height: 16px;
+    overflow: hidden;
+    background: url(bar_line.gif);
+}
+#box {
+    position: relative;
+    width: 900px;
+    height: 526px;
+    margin: 10px auto;
+    padding: 10px;
+    border: 8px solid #B7B7B7;
+    border-radius: 5px;
+    overflow: hidden;
+}
+#left, #right {
+    width: 445px;
+    height: 100%;
+    float: left;
+    position: relative;
+}
+#left #forAbsolute{  /* 用一个像素超过1px的绝对定位来覆盖相交处的border */
+    position: relative;
+    height: 30px;
+}
+#tab {
+    position: absolute;
+}
+#tab li{
+    float: left;
+    display: inline-block;
+    margin-left: 10px;
+    padding: 0px 10px 0 30px;
+    border: 1px solid #D4D4D4;
+    border-radius: 5px 5px 0 0;
+    color: #1a1a1a;
+    font-size: 12px;
+    height: 29px;
+    line-height: 29px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #EFEFEF;
+    background-repeat: no-repeat;
+    background-image: url(ico.gif);
+}
+#tab li:first-child {
+    margin-left: 0;
+}
+#tab li.active{
+    background: #FFFFFF;
+    border-bottom-width: 0;
+    height: 30px;
+    line-height: 30px;  /* 从29px变成了30px，可以遮住下方faceType的border，如果不更改这一项而是border-botton:1px solid white，则左侧的border会出现一个小白点 */
+    color: green;
+    font-width: 600;
+    background-repeat: no-repeat;
+    background-image: url(ico.gif);
+}
+#tab li.icon1 {
+    background-position: 10px 7px;
+}
+#tab li.icon2 {
+    background-position: 10px -32px;
+}
+#tab li.icon3 {
+    background-position: 10px -72px;
+}
+#left #faces{   /* 边框 */
+    height: 496px;
+    border: 1px solid #D4D4D4;
+    border-radius: 0 3px 3px 3px;
+}
+#faceType {
+    margin-left: 15px;
+    margin-top: 10px;
+    height: 32px;
+    line-height: 22px;
+}
+#faceType li{
+    float: left;
+    width: 50px;
+    height: 32px;
+    margin-left: 10px;
+    font-size: 12px;
+    color: #8c8c8c;
+    text-align: center;
+    display: inline-block;
+}
+#faceType li:first-child {
+    margin-left: 0;
+}
+#faceType li a:hover {  /* 不能用li:hover，否则鼠标悬浮是下方会多出一块绿色的 */
+    background: #E1FFD9;
+    padding: 4px 6px;
+}
+#faceType .now {
+    background: url(btn.gif);
+}
+#faceType .now a{
+    color: #fff;
+    font-weight: 600;
+}
+#content {
+    margin-left: -12px;
+    padding-top: 15px;
+}
+#content li {
+    display: inline-block;
+    height: 100px;
+    width: 80px;
+    margin: 0 0 25px 25px;
+    border: 1px solid #e9e9e9;
+    overflow: hidden;
+    float: left;  /* li之间有默认边距，必须float:left来清除 */
+    cursor: pointer;
+}
+#content li.active {
+    opacity: 1.0;
+    filter: alpha(opacity = 100);
+    cursor: pointer;
+}
+#content li.hidden {
+    opacity: 0.40;
+    filter: alpha(opacity = 40);
+    cursor: default;
+}
+#content li:hover {
+    border-color: #BAEA99;
+    box-shadow: 0px 0px 15px #91E85F;
+}
+#content li.hidden:hover {
+    box-shadow: none;
+    border-color:#E9E9E9;
+}
+#left #cover {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 528px;
+    width: 455px;
+    background: #fff;
+}
+#left #photo {
+    display: none;
+    position: absolute;
+    z-index: 3;
+    height: 526px;
+    width: 428px;
+    top: 0;
+    left: 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    box-shadow: 0 0 5px #ccc;
+}
+#left #glasses {
+    display: none;
+    position: absolute;
+    top: 150px;
+    left: 80px;
+    width: auto;
+    height: auto;
+    cursor: move;
+    overflow: hidden;
+    z-index: 10;
+}
+#left #glasses img{
+    float: left;
+}
+#tools {
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 25px;
+    width: 35px;
+    height: 173px;
+    overflow: hidden;
+    background: #FFF;
+    border: 1px solid #999;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #666;
+    font-size: 12px;
+    line-height: 18px;
+    z-index: 5;
+}
+#tools li {
+    color: #666;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 10px;
+    background: url(ico.gif) no-repeat;
+}
+#tools li.close {
+    padding-top: 12px;
+    background-position: 11px -115px;
+}
+#tools li.open {
+    padding-top: 12px;
+    background-position: 11px -155px;
+}
+#tools li.camera {
+    color: #CCC;
+    cursor: default;
+    padding-top: 17px;
+    background-position: 7px -200px;
+}
+#tools li.gauge {
+    color: #CCC;
+    cursor: default;
+    padding-top: 15px;
+    background-position: 7px -240px;
+}
+#tools li.reset {
+    color: #F60;
+    padding-top: 22px;
+    background-position: 7px -280px;
+}
+#right #search {
+    height: 80px;
+    width: 100%;
+    margin-left: 10px;
+    border: 1px solid #D4D4D4;
+    border-radius: 8px;
+    background: #FBFBFB;
+    box-shadow: 2px 2px 8px #BBB;
+}
+#right #search .selectWrap{
+    display: inline-block;
+    float: left;
+    width: 100px;
+    height: 22px;
+    margin: 12px 0 0 9px;
+    font-size: 12px;
+    line-height: 22px;
+}
+#right #search .selectWrap ul{
+     position: absolute;
+     width: 98px;
+     display: none;
+     overflow: hidden;
+     border: 1px solid #B7BABC;
+ }
+#search .selectWrap .select, #search .btn {
+    float: left;
+    display: inline-block;
+    color: #333;
+    width: 100px;
+    height: 22px;
+    overflow: hidden;
+    background: url(search.png) no-repeat;
+    font-size: 12px;
+    line-height: 22px;
+}
+#right #search .btn {
+    text-indent: -9999px;
+    margin: 12px 0 0 9px;
+    background-position: 0 -44px;
+}
+#right #search .select {
+    width: 90px;
+    line-height: 21px;
+    padding-left: 10px;
+}
+#right #search .selectWrap ul li {
+    margin-top: -1px;
+    background: #FFF;
+    border-top: 1px solid #B7BABC;
+}
+#right #search .selectWrap ul li a {
+    display: block;
+    color: #333;
+    height: 24px;
+    line-height: 24px;
+    padding-left: 10px;
+}
+#right #search .selectWrap ul li.current a {
+    background: #9AD8FF;
+}
+#right #search .selectWrap ul li a:hover {
+    background: #DAF1FF;
+}
+#right #glassList {
+    margin-left: 20px;
+    background: url(loading.gif) 50% 24px no-repeat;
+}
+#right #glassList li {
+    display: inline-block;
+    float: left;
+    width: 140px;
+    height: 95px;
+    margin-top: 15px;
+    border-bottom: 1px dashed #ccc;
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+}
+#right #glassList li img{
+    display: block;
+    margin: 0 auto 6px;
+}
+#right #glassList li:hover img,#right .glassList li.current img {
+    border-radius: 5px;
+    width: 128px;
+    height: 43px;
+    border: 1px solid #8CEE93;
+    box-shadow: 1px 1px 15px #23DE30;
+}
+#right #glassList li.current img {
+    border: 1px solid #FF7A7A;
+    box-shadow: 1px 1px 15px #F00;
+}
+#right #glassList li h5 {
+    text-align: center;
+    color: green;
+    font-size: 12px;
+    font-weight: 400;
+}
+#right #mask {
+    position: absolute;
+    height: 100%;
+    width: 457px;
+    top: 0;
+    left: 0;
+    background: #fff;
+    opacity: 0.7;
+    filter: alpha(opacity = 70);
+    z-index: 4;
+}
+
+

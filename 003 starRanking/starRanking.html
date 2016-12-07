@@ -1,0 +1,77 @@
+﻿<html>
+<head>
+<title>星级评分</title>
+<style>
+	body,div,ul,li,p {margin:0;padding:0;}
+	body {color:#666;font:12px/1.5 Arial;}
+	ul {list-style-type:none;}
+	#stars {width:600px;margin:10px auto;}
+	#stars ul,#stars span {display:inline-block;height:19px;line-height:19px;}/*不用float用inline-block*/
+	#stars ul {margin:0 10px;}
+	#stars li {display:inline-block;width:24px;cursor:pointer;text-indent:-9999;background:url(star.png) no-repeat;}
+	#stars li.active {background-position:0 -28px;}
+	#stars strong {color:#f60;font-style:normal;padding-left:10px;}
+	#stars p {position:absolute;top:40px;width:159px;height:60px;padding:7px 10px 0;display:none;background:url(icon.gif) no-repeat;}
+	#stars p em {color:#f60;display:block;font-style:normal;}
+</style>
+<script>
+	window.onload = function(){
+		var stars = document.getElementById("stars");
+		var starsLi = stars.getElementsByTagName("li");
+		var starsUl = document.getElementsByTagName("ul")[0]; 
+		var rankNow = document.getElementById("rankNow");  //当前评价, element不支持getElementById()
+		var explain = document.getElementById("explain");  //下方评分解释
+		var scoreNow = 0; //当前评分
+		var msg = [
+				"很不满意|差得太离谱，与卖家描述的严重不符，非常不满",
+				"不满意|部分有破损，与卖家描述的不符，不满意",
+				"一般|质量一般，没有卖家描述的那么好",
+				"满意|质量不错，与卖家描述的基本一致，还是挺满意的",
+				"非常满意|质量非常好，与卖家描述的完全一致，非常满意"
+				];
+		
+		for(var i=0; i<starsLi.length; i++){
+			starsLi[i].index = i;  
+			starsLi[i].onmouseover = function(){  //鼠标经过
+				rank(this.index+1);  //由于js的解析机制，遍历数组后，监听到的事件，索引值始终等于遍历结束之后的值，所以不能用i
+				explain.style.left = starsUl.offsetLeft + this.index * this.offsetWidth - 70 + "px";
+				explain.style.display = "block";
+				explain.innerHTML = "<em>" + (this.index+1) + "分 " + msg[this.index].match(/(.+)\|/)[1] + "<\/em>"
+									+ msg[this.index].match(/\|(.+)/)[1] + "<\/em>";
+			}
+			starsLi[i].onmouseout = function(){  //鼠标离开
+				rank(scoreNow);  
+				explain.style.display = "none";
+			}
+			starsLi[i].onclick = function(){  //点击
+				scoreNow = this.index+1;
+				rank(scoreNow);
+				rankNow.innerHTML = "<strong>" + (this.index+1) + "分<\/strong> (" + msg[this.index].match(/\|(.+)/)[1] + ")";
+			}
+		}
+
+		function rank(a){
+			for(var j=0; j<starsLi.length; j++){
+					starsLi[j].className = j<a ? "active" : "";
+				}
+		}
+	}
+</script>
+</head>
+
+<body>
+<div id="stars">
+	<span>点击星星就能打分</span>
+	<ul>
+		<li><a href="#">1</a></li>   <!--a中没有内容星星就不显示，不知道为什么-->
+		<li><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+		<li><a href="#">4</a></li>
+		<li><a href="#">5</a></li>
+	</ul>
+	<span id="rankNow"></span>
+	<p id="explain"></p>
+</div>
+</body>
+
+</html>

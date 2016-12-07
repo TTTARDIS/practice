@@ -1,0 +1,210 @@
+<html>
+<head>
+<title>发送与删除微博</title>
+<style>
+    body,ul,li,div,h2,p{margin:0;padding:0;font-family:微软雅黑;}
+    a{text-decoration:none;color:inherit;}
+    a:hover{text-decoration:underline;}
+    li{display:inline-block;}
+    ul{list-style-type:none;}
+    body{color:#333;background:#3c3a3b;font:12px/1.5;}
+    #msgBox{width:490px;background:#fff;border-radius:5px;margin:10px auto;padding-top:10px;}
+    #msgBox form{padding:0 20px 15px;background:url(boxBG.jpg) repeat-x 0 bottom;}
+    #msgBox form pS{font-weight:400;font:400 18px/1.5;}
+    #allSpeaking span {font-weight:400;font:14px/1.5;}
+    #userName,#conBox{color:#777;border:1px solid #d0d0d0;border-radius:6px;background:#fff;padding:3px 5px;font:14px/1.5;margin:10px auto;}
+    #userName{height:30px;width:180px;float:left;}
+    #conBox{width:448px;height:65px;resize:none;overflow:auto;}
+    #userName:focus, #conBox:focus{border:1px solid #7abb2c;}
+    #userGif{margin-top:10px;display:inline-block;margin-left:10px;}
+    #userGif img{height:29px;width:29px;cursor:pointer;border-radius:3px;margin-right:6px;opacity:0.5;filter:alpha(opacity=50);}
+    #userGif img.active{opacity:1;border:1px solid red;}
+    #userGif img:hover{opacity:1;border:1px solid red;}
+    #countTxt{color:#999;font-size:14px;}
+    #countTxt p {text-align:right;}
+    #maxNum{font:26px/30px Georgia, Tahoma, Arial;padding:0 5px;}
+    #sendBtn{border:0;width:112px;height:30px;cursor:pointer;margin-left:10px;background:url(btn.png) no-repeat;float:right;}
+    #sendBtn:hover{background-position:0 -30px;}
+    #allSpeaking{margin:10px 10px 0 10px;background:#e3eaec;width:460px;height:23px;padding-top:16px;padding-left:10px;}
+    #allSpeaking span{background:#fff;padding:5px 15px 2px 15px;}
+    #msgbox ul{padding:0 10px;width:470px;}
+    #msgBox ul li{border-bottom:1px dashed #d8d8d8;width:100%;padding:10px 0;}
+    #msgBox ul li:last-child{border-bottom:none;}
+    #msgBox ul li:hover{background:#f5f5f5;}
+    .pic{width:50px;height:50px;margin-left:10px;display:inline-block;border:1px solid #ccc;border-radius:3px;float:left;}
+    .content{width:385px;height:auto;display:inline-block;margin-left:10px;float:left;word-wrap:break-word;}
+    .uName{display:inline;color:#2b4a78;}
+    .uMsg{display:inline;}
+    .uTime{color:#889db6;font:12px/18px arial;margin-top:5px;overflow:hidden;}
+    .del{float:right;display:none;}
+</style>
+<script>
+    window.onload = function(){
+        var inputName = document.getElementById("userName");
+        var inputCon = document.getElementById("conBox");
+        var inputBtn = document.getElementById("sendBtn");
+        var canInputNum = document.getElementById("maxNum");
+        var ifCanInput = document.getElementById("ifCanInput");  //"还能输入” or "已经超过"
+        var inputLen = 140;  //还能输入的字数
+        var pics = document.getElementById("userGif").getElementsByTagName("img");
+        var myUl = document.getElementsByTagName("ul")[0];
+        var myLi = myUl.getElementsByTagName("li");
+        var myDel = new Array();
+        var picNum = 0;
+
+        for(var i=0; i<pics.length; i++){  //选择头像
+            pics[i].index = i;
+            pics[i].onclick = function(){
+                pics[picNum].className="";
+                this.className="active";
+                picNum = this.index;
+            }
+        }
+
+        for(var i=0; i<myLi.length; i++){
+            myDel[i] = myLi[i].getElementsByClassName("del")[0];
+            myDel[i].index = i;
+            myLi[i].onmouseover = function(){  //鼠标移入微博
+                this.getElementsByClassName("del")[0].style.display="inline";
+            }
+            myLi[i].onmouseout = function(){  //鼠标移出微博
+                this.getElementsByClassName("del")[0].style.display="none";
+            }
+            myDel[i].onclick = function(){  //点击删除微博
+                myUl.removeChild(myLi[this.index]);
+                for(var i=0; i<myLi.length; i++){  //index重置
+                    myDel[i] = myLi[i].getElementsByClassName("del")[0];
+                    myDel[i].index = i;
+                }
+            }
+        }
+
+        inputBtn.onclick = sendMsg;  //注意sendMsg后面不要()
+
+        inputCon.oninput = countLen;  //如果用onkeydown则不能监听ctrl+v之类的事件
+
+        document.onkeyup = function(){
+            if(event.keyCode==13 && event.ctrlKey){
+                sendMsg();
+            }
+        }
+
+        function sendMsg(){  //发送微博
+            if(/^\s*$/g.test(inputName.value)){
+                alert("请填写姓名！");
+                event.stopPropagation();
+            } else if(!/^[\u4e00-\u9fa5\w]{2,8}$/g.test(inputName.value)){
+                alert("姓名2-8位字母、数字、下划线、汉字组成！");
+                event.stopPropagation();
+            } else if(/^\s*$/g.test(inputCon.value)){
+                alert("请输入微博内容！");
+                event.stopPropagation();
+            } else if( conLength()>140 ){
+                alert("请不要超过140个字！");
+                event.stopPropagation();
+            } else{
+                var newLi = document.createElement("li");
+                var myDate = new Date();
+                var myTime = (myDate.getMonth()+1).toString().replace(/^(\d)$/,"0$1") + "月" + myDate.getDate().toString().replace(/^(\d)$/,"0$1")
+                            + "日 " + myDate.getHours() + ":" + myDate.getMinutes();
+                newLi.innerHTML = '<div class="pic"><img src="face' + (picNum+1) + '.gif"></div>'
+                                + '<div class="content">'
+                                    + '<div class="uName"><a href="#">' + inputName.value + ':</a></div>'
+                                    + '<div class="uMsg">' + inputCon.value + '</div>'
+                                    + '<div class="uTime">'
+                                        + '<span>' + myTime + '</span>'
+                                        + '<a class="del" href="#">删除</a>'
+                                    + '</div>'
+                                + '</div>';
+                myUl.insertBefore(newLi,myLi[0]);
+            }
+        }
+        
+        function countLen() {  //每一个按键事件重新计算一次可输入(已超过)的字数
+            inputLen = 140 - parseInt(conLength());  //可输入的字数
+            if(inputLen>0){
+                canInputNum.innerHTML = inputLen;
+            } else {
+                ifCanInput.innerHTML = "已超出";
+                canInputNum.innerHTML = inputLen;
+                canInputNum.style.color = "red";
+            }
+        }
+
+        function conLength(){  //返回计算已输入汉字数，一个英文字符算0.5个汉字
+            var len = 0;
+            for(var i=0; i<=inputCon.value.length; i++){
+                len += /[^\x00-\xff]/g.test(inputCon.value.charAt(i)) ? 1 : 0.5;
+            }
+            return len;
+        }
+        
+    }
+</script>
+</head>
+
+<body>
+<div id="msgBox">
+    <form>
+        <p>来 , 说说你在做什么 , 想什么</p>
+        <div>
+            <input id="userName">
+            <p id="userGif">
+                <img src="face1.gif" class="active">
+                <img src="face2.gif">
+                <img src="face3.gif">
+                <img src="face4.gif">
+            </p> 
+        </div>
+        <div>
+            <textarea id="conBox"></textarea>
+        </div>
+        <div  id="countTxt">
+            <p>
+                <span id="ifCanInput">还能输入</span><strong id="maxNum">140</strong><span>个字</span>
+                <input type="button" id="sendBtn" title="快捷键 ctrl+enter">
+            </p>
+        </div>
+    </form>
+    <div id="allSpeaking">
+        <span>大家在说</span>
+    </div>
+    <ul>
+        <li>
+            <div class="pic"><img src="face1.gif"></div>
+            <div class="content">
+                <div class="uName"><a href="#">测试名:</a></div>
+                <div class="uMsg">测试内容一行</div>
+                <div class="uTime">
+                    <span>11月01日 22:22</span>
+                    <a class="del" href="#">删除</a>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="pic"><img src="face2.gif"></div>
+            <div class="content">
+                <div class="uName"><a href="#">测试名：</a></div>
+                <div class="uMsg">测试内容两行测试内容两行测试内容两行测试内容两行测试内容两行测试内容两行测试内容两行</div>
+                <div class="uTime">
+                    <span>11月01日 22:22</span>
+                    <a class="del" href="#">删除</a>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="pic"><img src="face3.gif"></div>
+            <div class="content">
+                <div class="uName"><a href="#">测试名:</a></div>
+                <div class="uMsg">测试内容三行测试内容三行测试内容三行测试内容三行测试内容三行测试内容三行测试内容三行测试内容三行测试内容三行</div>
+                <div class="uTime">
+                    <span>11月01日 22:22</span>
+                    <a class="del" href="#">删除</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+
+</html>

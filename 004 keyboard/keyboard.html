@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>键盘操作div</title>
+<style>
+    body {margin:0;padding:0;overflow:hidden;}
+    pre {background:#f0f0f0;padding:10px;margin:10px;}
+    #box {position:absolute;top:50px;left:300px;width:100px;height:100px;background:red;}
+</style>
+<script>
+    //如果同时按住两个键不放，则永远只有后按的键执行，例如→+↓并不会向右下而是下，所以要设置setInterval
+    //http://www.jianshu.com/p/9b6d1b363f82    example.html
+    window.onload = function(){
+        var box = document.getElementById("box");
+
+        document.onkeydown = function(){
+            switch ((event||window.event).keyCode){
+            case 37:
+				box.style.left = box.offsetLeft - 10 + "px";
+                limits();
+				break;
+			case 38:
+                if(event.ctrlKey){
+                    box.style.width = box.offsetWidth * 1.5 + "px";
+                    box.style.height = box.offsetHeight * 1.5 + "px";
+                } else {
+                    box.style.top = box.offsetTop - 10 + "px";
+                    limits();
+				    break;
+                }
+			case 39:
+				box.style.left = box.offsetLeft + 10 + "px";
+                limits();
+				break;
+			case 40:
+                if(event.ctrlKey){
+                    box.style.width = box.offsetWidth * 0.75 + "px";
+                    box.style.height = box.offsetHeight * 0.75 + "px";
+                } else {
+                    box.style.top = box.offsetTop + 10 + "px";
+                    limits();
+				    break;
+                }
+			case 49:
+                event.ctrlKey && (box.style.background = "green");  //不知道为什么(event.ctrlKey) && 不能控制颜色而是切换标签页的快捷键
+                break;                                         //好了现在知道了因为box.style.background = "green"没有打括号
+            case 50:
+                event.ctrlKey && (box.style.background = "yellow");
+                break;
+            case 51:
+                event.ctrlKey && (box.style.background = "blue");
+                break;
+            }
+        }
+
+       function limits(){  //上下左右移动是防止溢出
+            var doc = [document.documentElement.clientWidth, document.documentElement.clientHeight];
+            (box.offsetLeft <= 0) && (box.style.left = 0);  //防止左边溢出
+            (box.offsetTop <= 0) && (box.style.top = 0);  //防止顶部溢出
+            (doc[0]-box.offsetLeft-box.offsetWidth <= 0) && (box.style.left=doc[0]-box.offsetWidth + "px");  //防止右边溢出
+            (doc[1]-box.offsetTop-box.offsetHeight <= 0) && (box.style.top=doc[1]-box.offsetHeight + "px");  //防止底部溢出
+        }
+    }
+</script>
+</head>
+<body>
+    <pre>
+        红色方块为键盘操作区域，您可以进行如下操作：
+
+        上：↑ 下：↓ 左：← 右：→
+
+        Ctrl + 1 : 背景变为绿色
+        Ctrl + 2 : 背景变为黄色
+        Ctrl + 3 : 背景变为蓝色
+        Ctrl + ↑ : 放大
+        Ctrl + ↓ : 缩小
+    </pre>
+    <div id="box"></div>
+</body>
+</html>
+
+

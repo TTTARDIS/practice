@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>MacOs菜单</title>
+<style>
+    body,div{margin:0;padding:0;}
+    #menu{position:absolute;bottom:0;text-align:center;width:100%;height:auto;}
+</style>
+<script>
+    window.onload = function(){
+        var myMenu = document.getElementById("menu");
+        var myImgs = myMenu.getElementsByTagName("img");
+        var formerWidth = [];  //原始宽度
+
+        for(var i=0; i<myImgs.length; i++){
+            formerWidth.push(myImgs[i].offsetWidth);
+            myImgs[i].width = parseInt(myImgs[i].offsetWidth/2);
+        }
+
+        document.onmousemove = function(event){
+            var event = event || window.event;
+            for(var i=0; i<myImgs.length; i++){
+                var a = event.clientX - myImgs[i].offsetLeft - myImgs[i].offsetWidth/2;
+                var b = event.clientY - myImgs[i].offsetTop - myMenu.offsetTop - myImgs[i].offsetWidth/2;
+                var scale = 1 - Math.sqrt(a*a + b*b)/300;
+                scale = (scale < 0.5) ? 0.5 : scale;
+                myImgs[i].width = formerWidth[i] * scale;
+            }
+        }
+    }
+</script>
+</head>
+<body>
+    <div id="menu">
+        <img src="1.png">
+        <img src="2.png">
+        <img src="3.png">
+        <img src="4.png">
+        <img src="5.png">
+        <img src="6.png">
+        <img src="7.png">
+        <img src="8.png">
+    </div>
+</body>
+</html>

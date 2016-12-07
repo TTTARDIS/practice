@@ -1,0 +1,51 @@
+﻿<html>
+<head>
+	<title>计时器</title>
+	<style>
+		body,div {margin:0;padding:0;}
+		body {color:white}
+		#time-counter {width:300px;text-align:center;background:#1a1a1a;margin:10px auto;padding:20px 0;}
+		span {color:black;width:80px;height:50px;border:2px solid grey;background:#fbfbfb;text-align:center;margin:0 10px;padding:0 10px;}
+		input {border:none;width:283px;height:50px;cursor:pointer;margin-top:20px;background:url(btn.png) no-repeat;}
+		input.cancel {background-position:0 -50px;}
+	</style>
+	<script>
+		window.onload = function(){
+			var timeCounter = document.getElementById("time-counter");
+			var btn = timeCounter.getElementsByTagName("input")[0];
+			var timer = null;
+			
+			btn.onclick = function(){
+				this.className == "" ? (timer = setInterval(updateTime, 1000)) : (clearInterval(timer));  
+				//不知道为什么教程里面是
+				//(timer = setInterval(updateTime, 1000), updateTime())	
+				//发现删掉之后没有区别
+				this.className = this.className == "" ? "cancel" : "";
+			}
+			
+			function updateTime(){
+				var mySpan = document.getElementsByTagName("span");
+				var seconds = mySpan[0].innerHTML.replace(/^0/,"")*60 + parseInt(mySpan[1].innerHTML.replace(/^0/,""));  //数字开头的0去掉
+				if(seconds <= 0){
+					clearInterval(timer);
+					return 0;
+				} else {
+					seconds--;
+					mySpan[0].innerHTML = format(parseInt(seconds/60));
+					mySpan[1].innerHTML = format(parseInt(seconds%60));
+				}
+			}
+			
+			function format(a){
+				return a.toString().replace(/^(\d)$/,"0$1");  //$1指的是前面正则中第一个括号中匹配的内容
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="time-counter">
+		<span>01</span>分钟<span>40</span>秒
+		<input type="button" value="" class="">
+	</div>
+</body>
+</html>

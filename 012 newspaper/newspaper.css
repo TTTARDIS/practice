@@ -1,0 +1,423 @@
+body, div, p, img {
+    margin: 0;
+    padding: 0;
+}
+body {
+    width: 892px;
+    height: 1386px;
+    margin: 0 auto;
+    padding: 0 44px;
+    font-size: 62.5%;
+    height: 1386px;
+}
+
+/********************** header ***********************/
+#top {
+    border-bottom: 2px solid #938e8c;
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+#top .address {
+    display: inline-block;
+    height: 20px;
+    width: 105px;
+    background: #d45d5c;
+    font-size: 1.2em;
+    color: #ffffff;
+    font-family: 黑体;
+    padding-top: 41px;
+    padding-left: 5px;
+}
+#top .date {
+    float: right;
+    display: inline-block;
+    height: 20px;
+    font-size: 1.2em;
+    color: #d45d5c;
+    font-family: 黑体;
+    padding-top: 41px;
+    margin-right: 0;
+}
+#header-main {
+    width: 100%;
+    height: 301px;
+    margin-top: 35px;
+}
+#header-main #header-img {
+    width: 641px;
+    height: 301px;
+    display: inline-block;
+    background: url(img/pic1.png) no-repeat;
+}
+#header-main #header-img .header-green {
+    width: 191px;
+    height: 301px;
+    background: green;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    float: left;
+    display: inline-block;
+}
+#header-main #header-img .header-red {
+    display: inline-block;
+    width: 191px;
+    height: 301px;
+    background: red;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    float: right;
+    display: inline-block;
+}
+#header-main #header-text {
+    height: 299px;
+    width: 203px;
+    float: right;
+    display: inline-block;
+    border-top: 2px solid #cc8091;
+}
+#header-main #header-text .about-tech {
+    margin-top: 10px;
+}
+#header-main #header-text .about-tech p {
+    color: #000000;
+    font-size: 2.4em;
+    font-family: 微软雅黑;
+    text-decoration: underline;
+    line-height: 40px;
+}
+#header-main #header-text .about-tech p .about-big {
+    font-size: 1.24em;
+}
+#header-main #header-text .about-text {
+     font-size: 1.2em;
+     font-family: 楷体;
+     color: #676767;
+     line-height: 10px;
+}
+#header-main #header-text .sevenhundred {
+    font-size: 11.6em;
+    font-family: 微软雅黑;
+    color: #75b86b;
+    line-height: 145px;
+}
+#header-main #header-text .num32 {
+    height: auto;
+    width: auto;
+    display: inline-block;
+    font-size: 5.5em;
+    font-family: 微软雅黑;
+    color: #cc8091;
+    line-height: 34px;
+}
+#header-main #header-text .textCSS {
+    height: auto;
+    width: 100px;
+    display: inline-block;
+}
+#header-main #header-text .textCSS .textCSS-1 {
+    display: inline-block;
+    font-size: 2em;
+    font-family: 微软雅黑;
+    color: #cc8091;
+    line-height: 15px;
+}
+#header-main #header-text .textCSS .textCSS-2 {
+    display: inline-block;
+    font-size: 1.2em;
+    font-family: 微软雅黑;
+    color: #aaaaaa;
+    line-height: 10px;
+}
+/******************* main ********************/
+#main {
+    width: 100%;
+    height: auto;
+}
+#main #three {
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+}
+#main #three #what {
+    display: inline-block;
+    width: 235px;
+    color: #767777;
+    font-size: 1.2em;
+    font-family: 宋体;
+    line-height: 16px;
+    vertical-align: top;
+}
+#main #three #what header{
+    color: #418c59;
+    font-size: 1.6em;
+    font-weight: 600;
+    text-decoration: underline;
+    font-family: 微软雅黑;
+    padding-bottom: 11px;
+}
+#main #three #when {
+    display: inline-block;
+    margin-left: 30px;
+    width: 200px;
+    color: #231815;
+    font-size: 1.2em;
+    font-family: 宋体;
+    line-height: 16px;
+    vertical-align: top;
+}
+#main #three #when header{
+    color: #d2994f;
+    font-size: 1.6em;
+    font-weight: 600;
+    text-decoration: underline;
+    font-family: 微软雅黑;
+    padding-bottom: 11px;
+}
+#main #three #when p {
+    opacity: 0.7;
+    filter: alpha(opacity = 70);
+}
+#main #three #how {
+    display: inline-block;
+    margin-left: 30px;
+    color: #231815;
+    font-size: 1.2em;
+    font-family: 宋体;
+    line-height: 18px;
+    vertical-align: top;
+}
+#main #three #how header{
+    color: #d2994f;
+    font-size: 1.6em;
+    font-weight: 600;
+    text-decoration: underline;
+    font-family: 微软雅黑;
+    padding-bottom: 11px;
+}
+#main #three #how p {
+    opacity: 0.7;
+    filter: alpha(opacity = 70);
+}
+#main #three #how span {
+    color: #cd4a48;
+    font-style: italic;
+}
+#main #content {
+    width: 100%;
+    height: auto;
+    margin-top: 60px;
+    display: inline-block;
+}
+#main #content #left {
+    display: inline-block;
+    width: 415px;
+    height: auto;
+    float: left;
+}
+#left header {
+    border-bottom: 2px #11456b solid;
+    padding-bottom: 10px;
+}
+#left header p {
+    color: #11456b;
+    font-family: 黑体;
+    font-weight: 600;
+    font-size: 4.2em;
+    line-height: 40px;
+}
+#left header .chinese{
+    color: #11456b;
+    font-family: 黑体;
+    font-weight: 600;
+    font-size: 3.3em;
+    line-height: 35px;
+}
+#left header p span {
+    color: #f5e327;
+    font-family: 黑体;
+    font-weight: 600;
+    font-size: 1.71em;
+    font-style: italic;
+}
+#left #left-content {
+    padding-top: 15px;
+    position: relative;
+}
+#left #left-content p {
+    color: #767777;
+    font-family: 宋体;
+    font-size: 1.2em;
+    line-height: 16px;
+    text-indent: 2em;
+}
+#left #left-content p:first-child {
+    text-indent: 0em;
+}
+#left #left-content p span {
+    float: left;
+    color: #f5e327;
+    font-family: 微软雅黑;
+    font-size: 5.83em;
+    line-height: 70px;
+}
+#left #left-content img {
+    float: right;
+    display: inline-block;
+    margin: 10px;
+}
+#main #content #right {
+    display: inline-block;
+    width: 458px;
+    height: auto;
+    margin-left: 19px;
+    float: left;
+}
+#right #show-image {
+    width: 458px;
+    height: 275px;
+    position: relative;
+}
+#right #show-image .pic3-bar {
+    position: absolute;
+    bottom: 8px;
+    height: 60px;
+    width: 100%;
+    background: rgba(23, 23, 23, 0.3);
+}
+#right #show-image .pic3-bar .bar-left {
+    border-left: solid 3px #72b16a;
+    padding-left: 0.5em;
+    display: inline-block;
+    margin-left: 35px;
+    margin-top: 8px;
+    height: 44px;
+    color: #ffffff;
+    font-size: 2.6em;
+    font-family: 微软雅黑;
+}
+#right #show-image .pic3-bar .bar-right {
+    padding-left: 0.5em;
+    display: inline-block;
+    marign-bottom: 8px;
+    height: 44px;
+    color: #72b16a;
+    font-size: 1.2em;
+    font-family: 微软雅黑;
+    font-style: italic;
+    line-height: 1.2em;
+}
+#right #catalog-box {
+    margin-top: 10px;
+    width: 458px;
+    height: 318px;
+    background: rgb(238, 237, 214);
+    position: relative;
+}
+#right #catalog-box #catalog {
+    padding-top: 30px;
+    padding-left: 30px;
+}
+#right #catalog-box #catalog p {
+    font-size: 1.6em;
+    color: #5a5b5b;
+    font-family: 宋体;
+    line-height: 35px;
+}
+#right #catalog-box #catalog .catalog-icon {
+    background: url(img/triangle.png) no-repeat;
+    padding-left: 10px;  /*奇巧淫技无处不在*/
+    margin-right: 10px;
+}
+#right #catalog-box #catalog .mark-word {
+    font-size: 0.75em;
+    color: #5a5b5b;
+    font-family: 宋体;
+    font-style: italic;
+    line-height: 25px;
+}
+#right #catalog-box #catalog-bottom {
+    position: absolute;
+    height: 160px;
+    width: 459px;
+    bottom: 0;
+}
+#right #catalog-box #catalog-bottom #catalog-left {
+    width: 260px;
+    height: 160px;
+    color: #ffffff;
+    background: #d45d5c;
+    float: left;
+    display: inline-block;
+}
+#catalog-bottom .zero {
+    width: auto;
+    float: left;
+    font-size: 11em;
+    font-family: 微软雅黑;
+    border-right: 2px solid #ffffff;
+    margin: 35px 5px 35px 10px;
+    line-height: 90px;
+}
+#catalog-bottom .num {
+    font-size: 2.1em;
+    font-family: 黑体;
+    font-style: italic;
+    margin-top: 42px;
+    line-height: 24px;
+}
+#catalog-bottom .hello {
+    font-size: 1.2em;
+    font-family: 黑体;
+    line-height: 15px;
+}
+#right #catalog-box #catalog-bottom #catalog-right {
+    width: 184px;
+    height: 140px;
+    float: left;
+    font-size: 1.4em;
+    font-family: 黑体;
+    font-style: italic;
+    line-height: 16px;
+    color: #938e8c;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+#right #catalog-box #catalog-bottom #catalog-right .quot1 {
+    display: inline-block;
+    float: left;
+    font-size: 5.15em;
+    font-style: normal;
+    height: 35px;
+    line-height: 30px;
+    margin-top: -20px;
+    margin-left: -40px;
+    vertical-align: bottom;
+    color: #d45d5c;
+    overflow: hidden;
+}
+#right #catalog-box #catalog-bottom #catalog-right .quot2 {
+    display: inline-block;
+    float: right;
+    font-size: 5.15em;
+    font-style: normal;
+    line-height: 70px;
+    margin-right: -20px;
+    color: #d45d5c;
+}
+/****************** footer ****************/
+footer {
+    width: 100%;
+    margin-top: 30px;
+    border-top: 1px solid #928e8c;
+    color: #dc5d5c;
+    font-size: 1.2em;
+    font-family: 微软雅黑;
+    text-align: right;
+}
+
+
+
+
+
+

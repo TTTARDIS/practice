@@ -1,0 +1,26 @@
+﻿<html>
+<head>
+	<title>鼠标移入移出&&过滤器</title>
+	<style>
+		ul, li { width:700px; margin:0; padding:0; list-style-type:none; }
+		#img-box { width:700px; overflow:hidden; border:1px solid black; padding:0 0 10px 10px; margin:0 auto; }
+		#img-box li { float:left; width:128px; border:solid black 1px; height:128px; margin:10px 10px 0 0; }
+		#img-box li img { float:left; cursor:crosshair; opacity:0.3; filter:alpha(opacity=30); }
+		#img-box li img:hover { opacity:1; filter:alpha(opacity=100); }
+	</style>
+</head>
+<body>
+	<ul id="img-box">
+		<li><img src="1.jpg" alt="图片"></li> 
+		<li><img src="1.jpg" alt="图片"></li>
+		<li><img src="1.jpg" alt="图片"></li>
+		<li><img src="1.jpg" alt="图片"></li>
+		<li><img src="1.jpg" alt="图片"></li>
+		<li><img src="1.jpg" alt="图片"></li> 
+		<li><img src="1.jpg" alt="图片"></li>
+		<li><img src="1.jpg" alt="图片"></li>
+		<li><img src="1.jpg" alt="图片"></li>
+		<li><img src="1.jpg" alt="图片"></li>
+	</ul>
+</body>
+</html>

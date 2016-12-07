@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>移动的小人</title>
+<style>
+    p{margin:10px;}
+    input{margin:10px;padding:3px 20px;}
+    div{width:66px;height:45px;background:url(1.gif) no-repeat;position:absolute;top:100px;left:50px;}
+</style>
+<script>
+    window.onload = function(){
+        var inputs = document.getElementsByTagName("input");
+        var pTxt = document.getElementsByTagName("p")[0];
+        var pic = document.getElementsByTagName("div")[0];
+    
+        inputs[0].onclick = function(){
+            event.stopPropagation();
+            clearEvent();
+            this.value += "(已激活)";
+            pTxt.innerHTML = "鼠标点击页面， 人物将移动至鼠标位置!";
+            document.onclick = function(event){
+                var event = event || window.event;
+                var myTarget = {x:event.clientX, y:event.clientY};  //目标位置
+                var nowPosition = {x:pic.offsetLeft, y:pic.offsetTop};  //当前位置
+                var myPath = [{x:nowPosition.x, y:nowPosition.y}];  //轨迹数组，当前位置为第一个元素
+                var step = {x:Math.ceil((myTarget.x-myPath[0].x)/10), y:Math.ceil((myTarget.y-myPath[0].y)/10)};  //运动轨迹的步长
+                for(var i=0; i<10; i++){  //画面分为十步跳过去
+                    myPath.push({x:(myPath[i].x+step.x), y:(myPath[i].y+step.y)});
+                }
+                move(pic, myPath);
+            }
+        }
+
+        inputs[1].onclick = function(){
+            clearEvent();
+            this.value += "(已激活)";
+            pTxt.innerHTML = "按住鼠标在页面滑动，人物将按照鼠标轨迹移动!";
+            var nowPosition = {x:pic.offsetLeft, y:pic.offsetTop};  //当前位置
+            var myPath = [{x:nowPosition.x, y:nowPosition.y}];  //轨迹数组，当前位置为第一个元素
+            document.onmousedown = function(){
+                var event = event || window.event;
+                myPath.push({x:event.clientX, y:event.clientY});
+                document.onmousemove = function(){
+                    var event = event || window.event;
+                    myPath.push({x:event.clientX, y:event.clientY});
+                }
+            }
+            document.onmouseup = function(){
+                document.onmousemove = null;
+                move(pic, myPath);
+            }
+        }
+
+        function clearEvent(){
+                document.onclick = null;  //取消点击鼠标移动
+                document.onmousemove = null;  //取消移动鼠标轨迹
+                document.onmouseup = null;  //取消移动鼠标轨迹
+            for(var i=0; i<inputs.length; i++){
+                inputs[i].value = inputs[i].value.replace("(已激活)", "");
+            }
+        }
+
+        function move(pic, myPath){
+            clearInterval(pic.timer);
+            pic.style.background = "url(2.gif)";
+            /*for(var i=0; i<myPath.length; i++){
+                pic.offsetLeft = myPath[i].x;
+                pic.offsetTop = myPath[i].y;
+            }*/
+            //这里要用setInterval而不是for循环，因为可能还没有到终点就发起了另一个移动事件，此时这个事件无论有没有完成都要终止
+            pic.timer = setInterval(moveOne, 30, pic, myPath);
+        }
+
+        function moveOne(pic, myPath){
+            var myXY = myPath.shift();
+            pic.style.left = myXY.x;
+            pic.style.top = myXY.y;
+            if(myPath.length==0){
+                clearInterval(pic.timer);
+                pic.style.background = "url(1.gif) no-repeat";
+            }
+        }
+    }
+</script>
+</head>
+
+<body>
+    <input type="button" value="根据鼠标点击位置移动">
+    <input type="button" value="根据鼠标移动轨迹移动">
+    <p>请点击激活按钮功能</p>
+    <div></div>
+</body>
+</html>
